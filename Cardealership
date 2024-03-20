@@ -1,0 +1,104 @@
+import 'dart:math';
+import 'dart:core';
+
+class CarType {
+  final String make;
+  final String type;
+
+  CarType({required this.make, required this.type});
+}
+
+class Car {
+  final String name;
+  final String model;
+  final int year;
+  final String color;
+  final CarType carType;
+
+  Car({required this.name, required this.model, required this.year, required this.color, required this.carType});
+
+  @override
+  String toString() {
+    return 'Name: $name, Model: $model, Year: $year, Color: $color, Make: ${carType.make}, Type: ${carType.type}';
+  }
+}
+
+List<Car> searchCars(List<Car> cars, {
+  String? name,
+  String? model,
+  int? year,
+  String? color,
+  String? make,
+  String? type,
+}) {
+  return cars.where((car) {
+    final matchesName = name == null || car.name.toLowerCase().contains(name.toLowerCase());
+    final matchesModel = model == null || car.model.toLowerCase().contains(model.toLowerCase());
+    final matchesYear = year == null || car.year == year;
+    final matchesColor = color == null || car.color.toLowerCase().contains(color.toLowerCase());
+    final matchesMake = make == null || car.carType.make.toLowerCase().contains(make.toLowerCase());
+    final matchesType = type == null || car.carType.type.toLowerCase().contains(type.toLowerCase());
+
+    return matchesName && matchesModel && matchesYear && matchesColor && matchesMake && matchesType;
+  }).toList();
+}
+
+void main() {
+  var cars = [
+    Car(name: 'Land Rover', model: 'Defender', year: 2021, color: 'Black', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Defender', year: 2020, color: 'Black', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Defender', year: 2022, color: 'Black', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Defender', year: 2019, color: 'Silver', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Defender', year: 2020, color: 'Red', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Discovery', year: 2021, color: 'White', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Discovery', year: 2022, color: 'Blue', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Discovery', year: 2020, color: 'Black', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Discovery', year: 2019, color: 'Silver', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Land Rover', model: 'Discovery', year: 2021, color: 'White', carType: CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Polestar', model: '2', year: 2022, color: 'Blue', carType: CarType(make: 'Electric', type: 'Passenger Car')),
+    Car(name: 'Polestar', model: '2', year: 2021, color: 'Grey', carType: CarType(make: 'Electric', type: 'Passenger Car')),
+    Car(name: 'Polestar', model: '2', year: 2020, color: 'Silver', carType: CarType(make: 'Electric', type: 'Passenger Car')),
+    Car(name: 'Polestar', model: '2', year: 2022, color: 'Black', carType: CarType(make: 'Electric', type: 'Passenger Car')),
+    Car(name: 'Polestar', model: '2', year: 2021, color: 'Blue', carType: CarType(make: 'Electric', type: 'Passenger Car')),
+    Car(name: 'Polestar', model: '3', year: 2023, color: 'Grey', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Polestar', model: '3', year: 2020, color: 'BLue', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Polestar', model: '3', year: 2021, color: 'Red', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Polestar', model: '3', year: 2023, color: 'Black', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Polestar', model: '3', year: 2022, color: 'Grey', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Jaguar', model: 'I-PACE', year: 2022, color: 'Red', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Jaguar', model: 'I-PACE', year: 2021, color: 'Black', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Jaguar', model: 'I-PACE', year: 2023, color: 'White', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Jaguar', model: 'I-PACE', year: 2021, color: 'Silver', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Jaguar', model: 'I-PACE', year: 2020, color: 'Red', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Jaguar', model:  'F-PACE', year: 2021, color:  'Silver', carType: CarType(make: 'Electric', type:  'SUV')),
+    Car(name: 'Jaguar', model:  'F-PACE', year: 2020, color:  'Black', carType: CarType(make: 'Electric', type:  'SUV')),
+    Car(name: 'Jaguar', model:  'F-PACE', year: 2022, color:  'Blue', carType: CarType(make: 'Electric', type:  'SUV')),
+    Car(name: 'Jaguar', model:  'F-PACE', year: 2021, color:  'Silver', carType: CarType(make: 'Electric', type:  'SUV')),
+    Car(name: 'Jaguar', model:  'F-PACE', year: 2020, color:  'White', carType: CarType(make: 'Electric', type:  'SUV')),
+    Car(name: 'Subaru', model: 'Outback', year: 2020, color: 'Green', carType:  CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Subaru', model: 'Outback', year: 2021, color: 'Blue', carType:  CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Subaru', model: 'Outback', year: 2019, color: 'Red', carType:  CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Subaru', model: 'Outback', year: 2022, color: 'Silver', carType:  CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Subaru', model: 'Outback', year: 2020, color: 'Black', carType:  CarType(make: 'Gas', type: 'Jeep')),
+    Car(name: 'Subaru', model: 'Impreza', year: 2019, color: 'Blue', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Subaru', model: 'Impreza', year: 2020, color: 'Black', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Subaru', model: 'Impreza', year: 2022, color: 'Grey', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Subaru', model: 'Impreza', year: 2021, color: 'Blue', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Subaru', model: 'Impreza', year: 2019, color: 'Black', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Mercedes', model: 'E-Class', year: 2019, color: 'Blue', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Mercedes', model: 'E-Class', year: 2018, color: 'White', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Mercedes', model: 'E-Class', year: 2020, color: 'Black', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Mercedes', model: 'E-Class', year: 2021, color: 'Blue', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Mercedes', model: 'E-Class', year: 2018, color: 'Red', carType: CarType(make: 'Gas', type: 'Passenger Car')),
+    Car(name: 'Mercedes', model: 'GLC', year: 2019, color: 'White', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Mercedes', model: 'GLC', year: 2020, color: 'Black', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Mercedes', model: 'GLC', year: 2018, color: 'Silver', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Mercedes', model: 'GLC', year: 2021, color: 'White', carType: CarType(make: 'Electric', type: 'SUV')),
+    Car(name: 'Mercedes', model: 'GLC', year: 2022, color: 'Black', carType: CarType(make: 'Electric', type: 'SUV'))
+  ];
+
+  var searchResults = searchCars(cars, name: '', model: '', year: 2020, color: "Black", make: 'Electric', type: '');
+  for (var car in searchResults) {
+    print(car.toString());
+  }
+}
